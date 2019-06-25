@@ -1,0 +1,32 @@
+{
+  "name": "Veczor",
+  "description": "An experiment by Pim de Wit",
+  "homepage_url": "https://veczor.web.app",
+  "short_name": "Veczor",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#202124",
+  "theme_color": "#202124",
+  "default_locale": "en",
+  "author": "Pim de Wit <https://pdw.io>",
+  "lang": "en",
+  "developer": {
+    "name": "Pim de Wit",
+    "url": "https://pdw.io"
+  },
+  "icons": [
+    {
+      "src": "/assets/favicons/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/favicons/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "prefer_related_applications": false,
+  "scope": "/"
+}

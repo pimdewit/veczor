@@ -1,0 +1,67 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+*.psd
+
+# OS or Editor folders
+.DS_Store
+.cache
+.settings
+.tmp
+.idea
+.modified
+.firebase
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Python
+*.py[co]
+env
+
+# npm
+node_modules
+npm-debug.log
+
+# Bower
+bower_components
+
+#Pip
+site-packages
+
+# Packages
+build
+dist
+public
+out
+storage
+
+# Keep credentials out of the repo
+settings.json
+gauth_credentials.json
+client_secrets.json
+.env
+
+# Emacs
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+.\#*
+
+# Generated files
+app-shared.yaml
+
+# Build target config
+target
+
+
+docs/jsdoc

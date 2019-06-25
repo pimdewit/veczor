@@ -1,0 +1,3 @@
+{
+  "extends": ["@pdw.io/eslint-config"]
+}

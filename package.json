@@ -1,0 +1,28 @@
+{
+  "name": "veczor",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "preact watch --template src/index.html",
+    "build": "npm run presetup && preact build --template src/index.html --dest public",
+    "presetup": "rm -rf public/assets && mkdir -p public",
+    "lint": "eslint --fix . && echo 'Lint complete.'"
+  },
+  "engines": {
+    "node": "12.3.1"
+  },
+  "engineStrict": true,
+  "dependencies": {
+    "gsap": "^2.1.3",
+    "preact": "10.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@pdw.io/eslint-config": "^1.2.1",
+    "copy-webpack-plugin": "^5.0.3",
+    "eslint-config-prettier": "^5.1.0",
+    "node-sass": "^4.12.0",
+    "preact-cli": "3.0.0-rc.2",
+    "prettier": "^1.18.2",
+    "sass-loader": "^7.1.0"
+  }
+}
