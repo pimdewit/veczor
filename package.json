@@ -14,7 +14,9 @@
   "engineStrict": true,
   "dependencies": {
     "gsap": "^2.1.3",
-    "preact": "10.0.0-beta.3"
+    "paper": "^0.12.3",
+    "preact": "10.0.0-beta.3",
+    "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
     "@pdw.io/eslint-config": "^1.2.1",

@@ -49,14 +49,24 @@ h1 {
   font-weight: bold;
 }
 
-canvas {
+p {
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 2em;
+  bottom: 1em;
+  color: white;
+  font-size: 1.2rem;
+  mix-blend-mode: difference;
+  font-weight: bold;
+}
+
+canvas {
+  /*position: fixed;*/
+  /*left: 50%;*/
+  /*top: 50%;*/
+  /*transform: translate(-50%, -50%);*/
   width: 100vw;
   height: 100vh;
-  pointer-events: none;
+  /*background-color: black;*/
 }
 
 a {

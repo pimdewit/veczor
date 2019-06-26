@@ -1,7 +1,7 @@
-# Audini
+# Veczor
 An audiovisual experiment.
 
-[See it live](https://audini.web.app)
+[See it live](https://veczor.web.app)
 
 
 ## Dev
