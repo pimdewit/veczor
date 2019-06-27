@@ -74,7 +74,6 @@ class Veczor {
      *
      * @type {Object}
      * @property {boolean} idleEnergy - Whether the instance is animating without user interaction.
-     * @property {number} distortionIntensity - The intensity of a distortion call.
      * @property {boolean} followPointer - Whether the elements should follow the position position.
      * @property {Object} position
      * @property {number} position.x - X position of the position.
@@ -90,7 +89,6 @@ class Veczor {
      * @private
      */
     this._options = {
-      distortionIntensity: 100,
       followPointer: false,
       position: {
         x: -1,
@@ -200,15 +198,16 @@ class Veczor {
     this._svg.position = this._engine.view.center;
   }
 
-  /** Shuffle all vector `Vector2D` points around (positional). */
-  distort() {
-    const { distortionIntensity } = this._options;
-
+  /**
+   * Shuffle all vector `Vector2D` points around (positional).
+   * @param {number} amount - The maximum distortion amplitude in pixels.
+   */
+  distort(amount) {
     this._elements.forEach(element => {
       if (element.segments) {
         element.segments.forEach(segment => {
-          segment.point.x += (Math.random() * distortionIntensity) - (distortionIntensity / 2);
-          segment.point.y += (Math.random() * distortionIntensity) - (distortionIntensity / 2);
+          segment.point.x += (Math.random() * intensity) - (intensity / 2);
+          segment.point.y += (Math.random() * intensity) - (intensity / 2);
         });
       }
     });

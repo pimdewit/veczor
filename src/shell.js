@@ -80,7 +80,7 @@ function keydown({ key }) {
       experiment.exportToFile();
       break;
     case('q'):
-      experiment.distort();
+      experiment.distort(10);
       break;
     case('w'):
       experiment.followPointer = !experiment.followPointer;
