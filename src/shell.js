@@ -35,8 +35,9 @@ async function start() {
 }
 
 function loop() {
+  experiment.velocity += 0.001;
   experiment.update();
-  manipulator.textContent = `${Math.round(experiment.timer * 100) / 100}`;
+  manipulator.textContent = `${Math.round(experiment.velocity * 100) / 100}`;
 
   requestAnimationFrame(loop);
 }
@@ -51,22 +52,22 @@ async function click(event) {
 }
 
 function deviceMotion(event) {
-  manipulateTimer(event.acceleration.y);
+  setVelocity(event.acceleration.y);
 }
 
 function mouseWheel(event) {
   event.preventDefault();
-  manipulateTimer(event.deltaY);
+  setVelocity(event.deltaY);
 }
 
-function manipulateTimer(delta) {
-  experiment.timer += (delta / 100);
+function setVelocity(delta) {
+  experiment.velocity += (delta / 100);
 }
 
 function pointermove(event) {
   const { x, y } = event;
 
-  experiment.pointer = {x, y};
+  experiment.position = { x, y };
 }
 
 function resize() {
@@ -86,6 +87,10 @@ function keydown({ key }) {
       break;
     case ('e'):
       experiment.idleEnergy = experiment.idleEnergy ? 0 : 0.05;
+      break;
+    case ('r'):
+      const color = Veczor.createNeonColor(0, canvas.height);
+      experiment.color = color;
       break;
   }
 }
