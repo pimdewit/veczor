@@ -302,6 +302,14 @@ class Veczor {
     this._svg.strokeColor = color;
   }
 
+  /**
+   * Apply a blending mode to the svg.
+   * @param {string} blendMode
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/blend-mode}
+   */
+  set blendMode(blendMode) {
+    this._options.element.blendMode = blendMode;
+  }
 }
 
 
