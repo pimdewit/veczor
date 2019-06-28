@@ -393,6 +393,23 @@ class Veczor {
     this._svg.strokeColor = color;
   }
 
+
+  /**
+   * Returns the current dash gap.
+   * @return {number}
+   */
+  get dashGap() {
+    return this._options.element.dashArray[0];
+  }
+
+  /**
+   * Set a dash gap on the svg elements.
+   * @param {number} dashGap
+   */
+  set dashGap(dashGap) {
+    this._options.element.dashArray[0] = dashGap;
+    this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
+  }
   /**
    * Apply a blending mode to the svg.
    * @param {paper.Item.blendMode|string} blendMode
