@@ -410,6 +410,24 @@ class Veczor {
     this._options.element.dashArray[0] = dashGap;
     this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
   }
+
+
+  /**
+   * Returns the current dash gap.
+   * @return {number}
+   */
+  get dashLength() {
+    return this._options.element.dashArray[1];
+  }
+
+  /**
+   * Set a dash gap on the svg elements.
+   * @param {number} dashLength
+   */
+  set dashLength(dashLength) {
+    this._options.element.dashArray[1] = dashLength;
+    this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
+  }
   /**
    * Apply a blending mode to the svg.
    * @param {paper.Item.blendMode|string} blendMode
