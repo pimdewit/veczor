@@ -213,6 +213,17 @@ class Veczor {
 
     this._elements.forEach((element, index) => element.dashOffset = dashVelocity / (index + 1));
   }
+
+  /**
+   * Distort a path by taking its segments, and moving all "Vector2" points around.
+   * @param {paper.Path|paper.CompoundPath|paper.Item} path
+   * @param {number} amount - The maximum distortion amplitude in pixels.
+   * @private
+   */
+  _distortPath(path, amount) {
+    path.segments.forEach(segment => {
+      segment.point.x += (Math.random() * amount) - (amount / 2);
+      segment.point.y += (Math.random() * amount) - (amount / 2);
     });
   }
 
@@ -232,15 +243,12 @@ class Veczor {
   /**
    * Shuffle all vector `Vector2D` points around (positional).
    * @param {number} amount - The maximum distortion amplitude in pixels.
+   * @see {Veczor._distortPath}
    */
   distort(amount) {
     this._elements.forEach(element => {
-      if (element.segments) {
-        element.segments.forEach(segment => {
-          segment.point.x += (Math.random() * intensity) - (intensity / 2);
-          segment.point.y += (Math.random() * intensity) - (intensity / 2);
-        });
-      }
+      const pathsToDistort = Veczor.getPathsFromElement(element);
+      pathsToDistort.forEach(path => this._distortPath(path, amount));
     });
   }
 
