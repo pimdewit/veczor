@@ -428,6 +428,25 @@ class Veczor {
     this._options.element.dashArray[1] = dashLength;
     this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
   }
+
+
+  /**
+   * Returns the currently rendered stroke width.
+   * @return {number}
+   */
+  get strokeWidth() {
+    return this._options.element.strokeWidth;
+  }
+
+  /**
+   * Set the stroke width of the svg elements.
+   * @param {number} strokeWidth
+   */
+  set strokeWidth(strokeWidth) {
+    this._options.element.strokeWidth = strokeWidth;
+
+    this._elements.forEach(element => element.strokeWidth = this._options.element.strokeWidth);
+  }
   /**
    * Apply a blending mode to the svg.
    * @param {paper.Item.blendMode|string} blendMode
