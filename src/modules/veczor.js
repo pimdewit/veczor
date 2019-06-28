@@ -87,6 +87,7 @@ class Veczor {
     };
   }
 
+
   /**
    * @param {HTMLCanvasElement} canvas - Canvas to draw to.
    * @param {SVGElement|string} svg - A string representation of an SVG file, or an
@@ -231,7 +232,7 @@ class Veczor {
    * @param {string} fileName
    */
   exportToFile(fileName = DEFAULT_FILE_NAME) {
-    const svg = this._svg.exportSVG({ asString: true });
+    const svg = /** @type {string} */ (this._svg.exportSVG({ asString: true }));
     const url = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
     const link = document.createElement('a');
@@ -311,7 +312,7 @@ class Veczor {
 
   /**
    * Set the colour of the subject.
-   * @param {string|Object} color
+   * @param {string|paper.Color} color
    * @see {@link https://stackoverflow.com/questions/21216417/paperjs-stroke-with-gradient}
    */
   set color(color) {
@@ -321,11 +322,13 @@ class Veczor {
 
   /**
    * Apply a blending mode to the svg.
-   * @param {string} blendMode
-   * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/blend-mode}
+   * @param {paper.Item.blendMode|string} blendMode
+   * @see {@link http://paperjs.org/reference/item/#blendmode}
    */
   set blendMode(blendMode) {
     this._options.element.blendMode = blendMode;
+
+    this._elements.forEach(element => element.blendMode = blendMode);
   }
 }
 
