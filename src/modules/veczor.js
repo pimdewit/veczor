@@ -21,7 +21,28 @@ class Veczor {
    */
   static async loadSVG(path) {
     const response = await fetch(path);
-    return await response.text();
+    const svgAsString = await response.text();
+
+    if (svgAsString.includes('viewBox="')) {
+      return Veczor.removeSVGViewBox(svgAsString);
+    }
+
+    return svgAsString;
+  }
+
+  /**
+   * Remove the viewBox attribute from the svg in order to prevent the visuals from
+   *   being cut off.The viewBox basically acts like a big compound path.
+   * @param {SVGElement|string} svg - A string representation of an SVG file, or an
+   *   actual SVGElement.
+   * @return {SVGElement|string}
+   */
+  static removeSVGViewBox(svg) {
+    if (typeof svg === 'string') {
+      return svg.replace(/ viewBox=".*?"/g, '');
+    }
+
+    return svg;
   }
 
   /**
