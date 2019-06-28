@@ -5,7 +5,7 @@ import { TweenLite } from 'gsap/TweenLite';
 /**
  * The default filename when attempting to download.
  * @type {string}
- * @see {Veczor.exportToFile}
+ * @see Veczor.exportToFile
  */
 const DEFAULT_FILE_NAME = 'veczor.web.app_export.svg';
 
@@ -160,7 +160,7 @@ class Veczor {
 
     /**
      * The supplied SVG file, imported in the Paper namespace.
-     * @see {Veczor.svg}
+     * @see Veczor.svg
      * @see {@link http://paperjs.org/reference/project/#importsvg-svg}
      * @type {?paper.Item}
      * @private
@@ -237,7 +237,13 @@ class Veczor {
 
   /**
    * Scale the SVG to match the canvas size.
-   * @param {number} [padding=0] - Padding from the sides to apply on the SVG.
+   *
+   * @example <caption>Common scenario</caption>
+   *   const {width, height} = canvas;
+   *   const padding = width > height ? height / 8 : width / 8;
+   *   Veczor.fit(padding);
+   *
+   * @param {number} [padding=0] - Whitespace between the edge of the canvas and the SVG in pixels.
    */
   fit(padding = 0) {
     const { width, height } = this._engine.view.bounds;
@@ -253,15 +259,21 @@ class Veczor {
     this._svg.fitBounds(bounds);
   }
 
-  /** Center the main SVG element to the center of the view. */
+  /**
+   * Center the main SVG element to the center of the view.
+   *
+   * @example <caption>Common scenario</caption>
+   *   window.addEventListener('resize', MyVeczorInstance.center());
+   */
   center() {
     this._svg.position = this._engine.view.center;
   }
 
   /**
    * Shuffle all vector `Vector2D` points around (positional).
+   *
    * @param {number} amount - The maximum distortion amplitude in pixels.
-   * @see {Veczor._distortPath}
+   * @see Veczor._distortPath
    */
   distort(amount) {
     this._elements.forEach(element => {
@@ -272,6 +284,7 @@ class Veczor {
 
   /**
    * Export the current view as a SVG file.
+   * Calling this will open the OS' file-system downloads prompt.
    * @param {string} fileName
    */
   exportToFile(fileName = DEFAULT_FILE_NAME) {
@@ -356,7 +369,7 @@ class Veczor {
   /**
    * Set the colour of the subject.
    * @param {string|paper.Color} color
-   * @see {@link https://stackoverflow.com/questions/21216417/paperjs-stroke-with-gradient}
+   * @see Veczor.createNeonColor
    */
   set color(color) {
     this._options.element.strokeColor = color;
