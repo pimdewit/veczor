@@ -3,6 +3,12 @@ An audiovisual experiment.
 
 [See it live](https://veczor.web.app)
 
+## Example visuals
+
+![Veczor, by Pim de Wit](/.repository/veczor-by-pim_de_wit-1.svg)
+![Veczor, by Pim de Wit](/.repository/veczor-by-pim_de_wit-2.svg)
+![Veczor, by Pim de Wit](/.repository/veczor-by-pim_de_wit-3.svg)
+
 
 ## Dev
 This app is created using Preact.
