@@ -2,6 +2,11 @@ import Paper from 'paper';
 import { TweenLite } from 'gsap/TweenLite';
 
 
+/**
+ * The default filename when attempting to download.
+ * @type {string}
+ * @see {Veczor.exportToFile}
+ */
 const DEFAULT_FILE_NAME = 'vezcor.web.app_export.svg';
 
 
@@ -293,7 +298,7 @@ class Veczor {
 
   /**
    * Set the colour of the subject.
-   * @param {string|object} color
+   * @param {string|Object} color
    * @see {@link https://stackoverflow.com/questions/21216417/paperjs-stroke-with-gradient}
    */
   set color(color) {
