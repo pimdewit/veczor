@@ -7,7 +7,7 @@ import { TweenLite } from 'gsap/TweenLite';
  * @type {string}
  * @see {Veczor.exportToFile}
  */
-const DEFAULT_FILE_NAME = 'vezcor.web.app_export.svg';
+const DEFAULT_FILE_NAME = 'veczor.web.app_export.svg';
 
 
 /** Visual experiment. */
@@ -52,12 +52,9 @@ class Veczor {
   static getSVGChildElements(svgElement) {
     const paths = [];
 
-    // return svgElement.children;
-
     svgElement.children.forEach(group => {
       if (group.children) {
         group.children.forEach(child => {
-          child._storedPosition = { x: child.position.x, y: child.position.y };
           paths.push(child);
         });
       }
@@ -76,10 +73,10 @@ class Veczor {
    */
   static createNeonColor(start, end) {
     const hue = Math.floor(Math.random() * 360);
-    const endHue = hue + Math.floor(Math.random() * 160);
+    const endHue = Math.floor(Math.random() * 360);
 
-    const startColor = `hsl(${hue}, 100%, 50%)`;
-    const endColor = `hsl(${endHue}, 100%, 50%)`;
+    const startColor = `hsl(${hue}, 70%, 50%)`;
+    const endColor = `hsl(${endHue}, 90%, 50%)`;
 
     return {
       gradient: {
@@ -122,8 +119,8 @@ class Veczor {
         y: -1,
       },
       element: {
-        blendMode: 'screen',
-        dashArray: [100, 10],
+        blendMode: 'normal',
+        dashArray: [100, 100],
         strokeCap: 'round',
         strokeColor: 'white',
         strokeWidth: 2,
@@ -177,8 +174,6 @@ class Veczor {
 
     this._svg = this._engine.project.importSVG(svg);
 
-    this._svg.scale(3);
-
     this._elements = Veczor.getSVGChildElements(this._svg);
 
     this._svg.strokeCap = strokeCap;
@@ -186,9 +181,8 @@ class Veczor {
     this._svg.strokeColor = strokeColor;
 
     this._elements.forEach(element => {
-      // element.strokeColor = '#'+Math.floor(Math.random()*16777215).toString(16);
       element.blendMode = blendMode;
-      element.dashArray = dashArray; // [Math.random() * 256, 190];
+      element.dashArray = dashArray;
     });
   }
 
@@ -197,11 +191,10 @@ class Veczor {
    * @private
    */
   _animate() {
-    this._elements.forEach((element, index) => {
-      // element.dashArray = [1000, 100 + (Math.tan(Math.sin(this.velocity) * 100))];
-      // element.dashArray = [100, Math.floor(Math.random() * 100)];
-      element.dashOffset = (this.velocity * 1000) / index;
-      // element.rotation = (Math.sin((this.velocity * 5)) * 0.01) * index;
+    const dashVelocity = this._options.velocity * 1000;
+
+    this._elements.forEach((element, index) => element.dashOffset = dashVelocity / (index + 1));
+  }
     });
   }
 
@@ -266,10 +259,12 @@ class Veczor {
     this._options.followPointer = followPointer;
 
     if (!followPointer) {
+      const { pointerIterationDelay } = this._options.element;
+
       this._elements.forEach((element, index) => {
-        TweenLite.to(element.position, 1, {
-          x: (this._canvas.width / 2) + (element._storedPosition.x / 2),
-          y: (this._canvas.height / 2) + (element._storedPosition.y / 2),
+        TweenLite.to(element.position, 0.5 + (pointerIterationDelay * index), {
+          x: this._engine.view.center.x,
+          y: this._engine.view.center.y,
         });
       });
     }
@@ -282,11 +277,14 @@ class Veczor {
    * @property {number} param.y - Position of the SVG on the Y axis.
    */
   set position({ x, y }) {
-    const { pointerIterationDelay } = this._options.element;
-
     if (this._options.followPointer) {
+      const { pointerIterationDelay } = this._options.element;
+
       this._elements.forEach((element, index) => {
-        TweenLite.to(element.position, pointerIterationDelay * index, { x, y });
+        TweenLite.to(element.position, pointerIterationDelay * index, {
+          x,
+          y,
+        });
       });
     }
   }
