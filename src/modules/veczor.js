@@ -99,8 +99,8 @@ class Veczor {
     /**
      *
      * @type {Object}
-     * @property {boolean} idleEnergy - Whether the instance is animating without user interaction.
      * @property {boolean} followPointer - Whether the elements should follow the position position.
+     * @property {number} velocity - The velocity that powers the animations are powered.
      * @property {Object} position
      * @property {number} position.x - X position of the position.
      * @property {number} position.y - Y position of the position.
@@ -116,6 +116,7 @@ class Veczor {
      */
     this._options = {
       followPointer: false,
+      velocity: 0,
       position: {
         x: -1,
         y: -1,
@@ -141,13 +142,6 @@ class Veczor {
      * @private
      */
     this._engine = Paper;
-
-    /**
-     * A number on which animations depend.
-     * @type {number}
-     * @see {Veczor._animate}
-     */
-    this.velocity = 0;
 
     /**
      * The supplied SVG file, imported in the Paper namespace.
