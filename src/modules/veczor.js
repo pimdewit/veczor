@@ -180,7 +180,7 @@ class Veczor {
   }
 
 
-  // Application
+  // Private methods
 
   /**
    * Setup the given SVG to match the Veczor aesthetic.
@@ -233,6 +233,24 @@ class Veczor {
   /** Main update method. Hook this up to your own animation loop! */
   update() {
     this._animate();
+  }
+
+  /**
+   * Scale the SVG to match the canvas size.
+   * @param {number} [padding=0] - Padding from the sides to apply on the SVG.
+   */
+  fit(padding = 0) {
+    const { width, height } = this._engine.view.bounds;
+
+    const x = padding;
+    const y = padding;
+
+    const boundsWidth = width - (padding * 2);
+    const boundsHeight = height - (padding * 2);
+
+    const bounds = new this._engine.Rectangle(x, y, boundsWidth, boundsHeight);
+
+    this._svg.fitBounds(bounds);
   }
 
   /** Center the main SVG element to the center of the view. */
