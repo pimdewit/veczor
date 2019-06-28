@@ -5,9 +5,11 @@ const VECTORS = [
   'assets/square.svg',
   'assets/square3.svg',
   'assets/square4.svg',
-  'assets/square5.svg',
   'assets/square6.svg',
   'assets/square7.svg',
+  'assets/square8.svg',
+  'assets/square9.svg',
+  'assets/10.svg',
 ];
 
 const url = VECTORS[Math.floor(Math.random() * VECTORS.length)];
