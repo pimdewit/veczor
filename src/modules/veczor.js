@@ -301,6 +301,23 @@ class Veczor {
   // Configuration
 
   /**
+   * The current velocity.
+   * @return {number}
+   */
+  get velocity() {
+    return this._options.velocity;
+  }
+
+  /**
+   * Adjust the velocity.
+   * @param {number} velocity
+   */
+  set velocity(velocity) {
+    TweenLite.to(this._options, 2, { velocity });
+  }
+
+
+  /**
    * Gets whether the elements are following the position.
    * @return {boolean}
    */
