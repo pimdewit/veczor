@@ -384,6 +384,14 @@ class Veczor {
 
 
   /**
+   * Returns the currently rendered colour.
+   * @return {string|paper.Color}
+   */
+  get color() {
+    return this._options.element.color;
+  }
+
+  /**
    * Set the colour of the subject.
    * @param {string|paper.Color} color
    * @see Veczor.createNeonColor
@@ -447,6 +455,16 @@ class Veczor {
 
     this._elements.forEach(element => element.strokeWidth = this._options.element.strokeWidth);
   }
+
+
+  /**
+   * Returns the active blending mode.
+   * @return {string}
+   */
+  get blendMode() {
+    return this._options.element.blendMode;
+  }
+
   /**
    * Apply a blending mode to the svg.
    * @param {paper.Item.blendMode|string} blendMode
