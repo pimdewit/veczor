@@ -66,6 +66,23 @@ class Veczor {
   }
 
   /**
+   * Find and return all Path elements from the SVG.
+   * Path elements are significant because they contain "Vector2" coordinates.
+   * @param {paper.PathItem|paper.Path|paper.CompoundPath|paper.Item} element
+   * @private
+   * @return {Array.<paper.Path>|Array}
+   */
+  static getPathsFromElement(element) {
+    if (element.segments) {
+      return [element];
+    } else if (element.children) {
+      return element.children.filter(child => child.segments);
+    }
+
+    return [];
+  }
+
+  /**
    * Create a gradient stroke.
    * @param {number} start - The Y position of where the gradient should start.
    * @param {number} end - The Y position of where the gradient should end.
