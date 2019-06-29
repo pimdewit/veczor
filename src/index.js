@@ -1,3 +1,4 @@
 import './style.css';
 
-import('./shell.js');
+
+import('./modules/demo.js');
