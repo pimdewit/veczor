@@ -235,6 +235,24 @@ class Veczor {
     });
   }
 
+  /**
+   * Interpolate the individual element positions to the given coordinates.
+   * This method is here purely for visual/stylistic purposes.
+   * @param {number} x
+   * @param {number} y
+   * @private
+   */
+  _tweenElementPositions(x, y) {
+    const { positionStagger } = this._options.element;
+
+    this._elements.forEach((element, index) => {
+      TweenLite.to(element.position, positionStagger * index, {
+        x,
+        y,
+      });
+    });
+  }
+
 
   // Public API
 
@@ -344,18 +362,11 @@ class Veczor {
    * @param {boolean} followPointer
    */
   set followPointer(followPointer) {
-    const { positionStagger } = this._options.element;
     const { x, y } = followPointer ? this._options.position : this._engine.view.center;
 
     this._options.followPointer = followPointer;
 
-    this._elements.forEach(({ position }, index) => {
-      const duration = 0.5 + (positionStagger * index);
-      TweenLite.to(position, duration, {
-        x,
-        y,
-      });
-    });
+    this._tweenElementPositions(x, y);
   }
 
 
@@ -369,14 +380,7 @@ class Veczor {
     this._options.position.y = y;
 
     if (this._options.followPointer) {
-      const { positionStagger } = this._options.element;
-
-      this._elements.forEach((element, index) => {
-        TweenLite.to(element.position, positionStagger * index, {
-          x,
-          y,
-        });
-      });
+      this._tweenElementPositions(x, y);
     }
   }
 
