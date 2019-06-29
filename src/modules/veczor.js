@@ -147,6 +147,14 @@ class Veczor {
     };
 
     /**
+     * The stored velocity. We use this to check if we should re-render.
+     * @type {number}
+     * @private
+     * @see Veczor.update
+     */
+    this._storedVelocity = this._options.velocity;
+
+    /**
      * @type {HTMLCanvasElement}
      * @private
      */
@@ -232,7 +240,13 @@ class Veczor {
 
   /** Main update method. Hook this up to your own animation loop! */
   update() {
+    if (this.velocity === this._storedVelocity) {
+      return;
+    }
+
     this._animate();
+
+    this._storedVelocity = this.velocity;
   }
 
   /**
