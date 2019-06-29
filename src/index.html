@@ -71,11 +71,30 @@
     file.match(/\.css$/)?'style':'script' %>" <%=
     file.match(/bundle\.\w{5}\.esm\.js$/)?'crossorigin="anonymous"':'' %>> <% }
     %> <% } %>
+
+    <script>
+      if (!navigator.doNotTrack) {
+        (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r;
+          i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+          }, i[r].l = 1 * new Date();
+          a = s.createElement(o),
+              m = s.getElementsByTagName(o)[0];
+          a.async = 1;
+          a.src = g;
+          m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-86484170-4', 'auto');
+        ga('send', 'pageview');
+      }
+    </script>
   </head>
   <body>
     <noscript><p>This site requires javascript.</p></noscript>
 
-    <p aria-hidden="true">Manipulator: <span id="manipulator"></span></p>
+    <p aria-hidden="true">Iteration: <span id="iteration"></span></p>
     <h1>Veczor, an experiment by <a href="https://pdw.io">Pim</a></h1>
 
     <details class="config">
