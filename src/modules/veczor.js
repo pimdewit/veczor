@@ -365,6 +365,9 @@ class Veczor {
    * @property {number} param.y - Position of the SVG on the Y axis.
    */
   set position({ x, y }) {
+    this._options.position.x = x;
+    this._options.position.y = y;
+
     if (this._options.followPointer) {
       const { positionStagger } = this._options.element;
 
