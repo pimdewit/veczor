@@ -2,14 +2,14 @@ import Veczor from './modules/veczor';
 
 
 const VECTORS = [
-  'assets/square.svg',
-  'assets/square3.svg',
-  'assets/square4.svg',
-  'assets/square6.svg',
-  'assets/square7.svg',
-  'assets/square8.svg',
-  'assets/square9.svg',
-  'assets/10.svg',
+  'assets/demo/1.svg',
+  'assets/demo/2.svg',
+  'assets/demo/3.svg',
+  'assets/demo/4.svg',
+  'assets/demo/5.svg',
+  'assets/demo/6.svg',
+  'assets/demo/7.svg',
+  'assets/demo/8.svg',
 ];
 
 const url = VECTORS[Math.floor(Math.random() * VECTORS.length)];
