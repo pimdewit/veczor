@@ -125,7 +125,7 @@ class Veczor {
      * @property {string} element.strokeCap - SVG strokeCap.
      * @property {string} element.strokeColor - SVG strokeColor.
      * @property {number} element.strokeWidth - SVG strokeWidth.
-     * @property {number} element.pointerIterationDelay - A delay that gets applied with every
+     * @property {number} element.positionStagger - A delay that gets applied with every
      *   iteration of the elements array (purely for visual effect).
      * @private
      */
@@ -142,7 +142,7 @@ class Veczor {
         strokeCap: 'round',
         strokeColor: 'white',
         strokeWidth: 2,
-        pointerIterationDelay: 0.006,
+        positionStagger: 0.006,
       },
     };
 
@@ -344,18 +344,18 @@ class Veczor {
    * @param {boolean} followPointer
    */
   set followPointer(followPointer) {
+    const { positionStagger } = this._options.element;
+    const { x, y } = followPointer ? this._options.position : this._engine.view.center;
+
     this._options.followPointer = followPointer;
 
-    if (!followPointer) {
-      const { pointerIterationDelay } = this._options.element;
-
-      this._elements.forEach((element, index) => {
-        TweenLite.to(element.position, 0.5 + (pointerIterationDelay * index), {
-          x: this._engine.view.center.x,
-          y: this._engine.view.center.y,
-        });
+    this._elements.forEach(({ position }, index) => {
+      const duration = 0.5 + (positionStagger * index);
+      TweenLite.to(position, duration, {
+        x,
+        y,
       });
-    }
+    });
   }
 
 
@@ -366,10 +366,10 @@ class Veczor {
    */
   set position({ x, y }) {
     if (this._options.followPointer) {
-      const { pointerIterationDelay } = this._options.element;
+      const { positionStagger } = this._options.element;
 
       this._elements.forEach((element, index) => {
-        TweenLite.to(element.position, pointerIterationDelay * index, {
+        TweenLite.to(element.position, positionStagger * index, {
           x,
           y,
         });
