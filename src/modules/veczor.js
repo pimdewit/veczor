@@ -371,6 +371,14 @@ class Veczor {
 
 
   /**
+   * Get the position of the SVG.
+   * @return {{x: number, y: number}}
+   */
+  get position() {
+    return this._options.position;
+  }
+
+  /**
    * @param {Object} param
    * @property {number} param.x - Position of the SVG on the X axis.
    * @property {number} param.y - Position of the SVG on the Y axis.
