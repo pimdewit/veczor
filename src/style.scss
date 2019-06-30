@@ -1,0 +1,21 @@
+:root {
+  --color-background: #202124;
+  --color-font: #bfc3c7;
+  --color-link: #fff;
+  --color-a11y-focus-ring: #2196f3;
+  --color-overlay: rgba(0, 0, 0, .6);
+
+  --font-stack: 'Inria Sans', 'Roboto', sans-serif;
+
+  --dialog-width: 30rem;
+  --dialog-color-button: rgba(1, 5, 11, .2);
+  --dialog-color-button--hover: rgba(1, 5, 11, .8);
+  --dialog-color-button-type: var(--color-font);
+}
+
+@import './style/helpers';
+@import './style/global';
+@import './style/modules/a11y';
+@import './style/modules/config';
+@import './style/modules/copyright';
+@import './style/modules/information';
