@@ -1,0 +1,24 @@
+@import '../../style/helpers';
+
+.Inner {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+
+  height: 100%;
+  padding: 0 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+
+  gap: 2rem;
+
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include breakpoint(m) {
+    grid-template-columns: 1fr 1fr;
+  }
+}

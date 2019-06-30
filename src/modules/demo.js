@@ -2,8 +2,12 @@ import Veczor from './veczor';
 import VeczorGUI from './veczor.gui';
 import DemoSVG from './svgs';
 
+
 const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('canvas'));
 const iteration = document.getElementById('iteration');
+
+const presets = document.querySelectorAll('[data-preset]');
+
 let experiment = null;
 let gui = null;
 let svgs = null;
@@ -35,7 +39,10 @@ async function start() {
 function setup() {
   canvas.addEventListener('wheel', mouseWheel, { passive: true });
   canvas.addEventListener('pointermove', pointerMove, { passive: true });
-  canvas.addEventListener('pointerdown', click, { passive: true });
+  // canvas.addEventListener('mousemove', pointerMove, { passive: true });
+  // canvas.addEventListener('touchmove', pointerMove, { passive: true });
+  // canvas.addEventListener('pointerdown', click, { passive: true });
+  presets.forEach(preset => preset.addEventListener('click', initPresets, { passive: true }));
 }
 
 async function loadAllFiles() {
@@ -89,6 +96,109 @@ function resize() {
   const padding = canvas.width > canvas.height ? canvas.height / 8 : canvas.width / 8;
   experiment.fit(padding);
   experiment.center();
+}
+
+
+function cartography() {
+  experiment.svg = svgs[2];
+  experiment.dashLength = 100;
+  experiment.dashGap = 10;
+  experiment.strokeWidth = 1;
+  experiment.blendMode = 'screen';
+  experiment._elements.forEach(element => {
+    element.dashArray = [
+      Math.random() * 10,
+      Math.random() * 100,
+    ];
+  });
+  experiment.distort(100);
+}
+
+function fireworks() {
+  experiment.svg = svgs[4];
+  experiment.strokeWidth = 10;
+  experiment.blendMode = 'screen';
+  experiment._elements.forEach(element => {
+    element.strokeColor = '#f2f3f4';
+    element.dashArray = [
+      (Math.random() * 50) + 25,
+      (Math.random() * 500) + 250,
+    ];
+  });
+  experiment.distort(1000);
+  experiment.followPointer = false;
+  experiment.center();
+}
+
+function vaporwave() {
+  experiment.svg = svgs[5];
+  experiment.strokeWidth = 20;
+  experiment.blendMode = 'screen';
+  experiment.dashLength = 1000;
+  experiment.dashGap = 100;
+  experiment._elements.forEach(element => {
+    element.strokeColor = Veczor.createNeonColor(0, 4000, 180, 120);
+  });
+  experiment.distort(50);
+  experiment.followPointer = false;
+  experiment.distort(200);
+  experiment.center();
+}
+
+function vivaPinata() {
+  experiment.svg = svgs[6];
+  experiment.strokeWidth = 4;
+  experiment.blendMode = 'screen';
+  experiment.dashLength = 1000;
+  experiment.dashGap = 256;
+  experiment._elements.forEach(element => {
+    element.strokeColor = Veczor.createNeonColor(0, 1, -80, 160);
+  });
+  experiment.followPointer = false;
+
+  if (experiment.position.x === -1) {
+    experiment.position.x = canvas.width / 4;
+    experiment.position.y = canvas.height / 4;
+  }
+
+  experiment.followPointer = true;
+}
+
+function mehndi() {
+  experiment.followPointer = false;
+  experiment.svg = svgs[7];
+  experiment.strokeWidth = 2;
+  experiment.blendMode = 'normal';
+  experiment.dashLength = Math.random() * 512;
+  ;
+  experiment.dashGap = Math.random() * 512;
+  experiment._elements.forEach(element => {
+    element.strokeColor = Veczor.createNeonColor(0, 1, -80, 160);
+  });
+}
+
+function initPresets(event) {
+  const preset = event.target.dataset.preset;
+
+  switch (preset) {
+    case 'cartography':
+      cartography();
+      break;
+    case 'fireworks':
+      fireworks();
+      break;
+    case 'vaporwave':
+      vaporwave();
+      break;
+    case 'vivaPinata':
+      vivaPinata();
+      break;
+    case 'mehndi':
+      mehndi();
+      break;
+  }
+
+  resize();
 }
 
 

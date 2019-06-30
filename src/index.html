@@ -52,12 +52,7 @@
     <meta name="theme-color" content="<%= htmlWebpackPlugin.options.manifest.theme_color %>">
     <meta name="google-site-verification" content="xx8el8oHrnKZTvqM8gjQ9V8XKMNjV_DQfA1e6Y83hZw" />
 
-    <% if (htmlWebpackPlugin.options.manifest.theme_color) { %>
-    <meta
-      name="theme-color"
-      content="<%= htmlWebpackPlugin.options.manifest.theme_color %>"
-    />
-    <% } %> <% const loadManifest =
+    <% const loadManifest =
     htmlWebpackPlugin.options.createLoadManifest(compilation.assets,
     webpack.namedChunkGroups);%> <% const filesRegexp =
     htmlWebpackPlugin.options.inlineCss ? /\.(chunk\.\w{5}\.css|js)$/ :
@@ -92,71 +87,7 @@
     </script>
   </head>
   <body>
-    <noscript><p>This site requires javascript.</p></noscript>
-
-    <p aria-hidden="true">Iteration: <span id="iteration"></span></p>
-    <h1>Veczor, an experiment by <a href="https://pdw.io">Pim</a></h1>
-
-    <details class="config">
-      <summary>Config</summary>
-
-      <div class="config__drawer">
-
-        <details class="config__advanced">
-          <summary>Advanced</summary>
-
-          <label for="dash-length">
-            Dash Length
-            <input type="range" id="dash-length" value="100" min="1" max="1000" step="1">
-            <output id="dash-length-output">100</output>
-          </label>
-
-          <label for="dash-gap">
-            Dash Gap
-            <input type="range" id="dash-gap" value="100" min="0" max="1000" step="1">
-            <output id="dash-gap-output">100</output>
-          </label>
-
-          <label for="thickness">
-            Thickness
-            <input type="range" id="thickness" value="2" min="0.5" max="20" step="0.5">
-            <output id="thickness-output">20</output>
-          </label>
-
-          <label for="follow-pointer">
-            <input type="checkbox" id="follow-pointer">
-            Follow Pointer
-          </label>
-
-          <label for="animate">
-            <input type="checkbox" id="animate" checked>
-            Animate
-          </label>
-
-          <label for="blend-mode">
-            Blending mode
-            <select name="blend-mode" id="blend-mode">
-              <option value="normal" selected>Normal</option>
-              <option value="screen">Screen</option>
-              <option value="multiply">Multiply</option>
-              <option value="difference">Difference</option>
-              <option value="color-burn">Color Burn</option>
-              <option value="overlay">Overlay</option>
-            </select>
-          </label>
-
-          <button type="button" id="random-color">Change colour</button>
-
-          <button type="button" id="distort">Distort</button>
-
-          <button type="button" id="export">Export to SVG</button>
-        </details>
-      </div>
-
-    </details>
-
-    <canvas id="canvas" data-paper-resize="true"></canvas>
-
+    <p aria-hidden="true" class="helper">Iteration: <output id="iteration"/></p>
     <%= htmlWebpackPlugin.options.ssr() %> <% if (webpack.assets.filter(entry =>
     entry.name.match(/bundle(\.\w{5})?.esm.js$/)).length > 0) { %> <% /* Fix for
     safari < 11 nomodule bug. TODO: Do the following only for safari. */ %>

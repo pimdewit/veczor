@@ -8,6 +8,9 @@ const CONFIG_ELEMENTS = {
   BLEND_MODE: document.getElementById('blend-mode'),
   COLOUR: document.getElementById('random-color'),
 
+  CANVAS_PADDING: document.getElementById('canvas-padding'),
+  CANVAS_PADDING_OUTPUT: document.getElementById('canvas-padding-output'),
+
   DASH_LENGTH: document.getElementById('dash-length'),
   DASH_LENGTH_OUTPUT: document.getElementById('dash-length-output'),
 
@@ -31,13 +34,18 @@ class VeczorGUI {
     this.animate = this.animate.bind(this);
     this.blendMode = this.blendMode.bind(this);
     this.color = this.color.bind(this);
+    this.canvasPadding = this.canvasPadding.bind(this);
     this.dashLength = this.dashLength.bind(this);
     this.dashGap = this.dashGap.bind(this);
     this.thickness = this.thickness.bind(this);
     this.exportToFile = this.exportToFile.bind(this);
     this.keydown = this.keydown.bind(this);
 
-    document.addEventListener('keydown', this.keydown);
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    document.addEventListener('keydown', this.keydown, { passive: true });
 
     CONFIG_ELEMENTS.DISTORT.addEventListener('click', this.distort, false);
     CONFIG_ELEMENTS.FOLLOW_POINTER.addEventListener('click', this.followPointer, false);
@@ -45,12 +53,31 @@ class VeczorGUI {
     CONFIG_ELEMENTS.BLEND_MODE.addEventListener('input', this.blendMode, false);
     CONFIG_ELEMENTS.COLOUR.addEventListener('click', this.color, false);
 
+    CONFIG_ELEMENTS.CANVAS_PADDING.addEventListener('input', this.canvasPadding, false);
+
     CONFIG_ELEMENTS.DASH_LENGTH.addEventListener('input', this.dashLength, false);
     CONFIG_ELEMENTS.DASH_GAP.addEventListener('input', this.dashGap, false);
 
     CONFIG_ELEMENTS.THICKNESS.addEventListener('input', this.thickness, false);
 
     CONFIG_ELEMENTS.EXPORT.addEventListener('click', this.exportToFile, false);
+  }
+
+  removeEventListeners() {
+    document.removeEventListener('keydown', this.keydown);
+
+    CONFIG_ELEMENTS.DISTORT.removeEventListener('click', this.distort);
+    CONFIG_ELEMENTS.FOLLOW_POINTER.removeEventListener('click', this.followPointer);
+    CONFIG_ELEMENTS.ANIMATE.removeEventListener('input', this.animate);
+    CONFIG_ELEMENTS.BLEND_MODE.removeEventListener('input', this.blendMode);
+    CONFIG_ELEMENTS.COLOUR.removeEventListener('click', this.color);
+
+    CONFIG_ELEMENTS.DASH_LENGTH.removeEventListener('input', this.dashLength);
+    CONFIG_ELEMENTS.DASH_GAP.removeEventListener('input', this.dashGap);
+
+    CONFIG_ELEMENTS.THICKNESS.removeEventListener('input', this.thickness);
+
+    CONFIG_ELEMENTS.EXPORT.removeEventListener('click', this.exportToFile);
   }
 
   distort() {
@@ -71,6 +98,14 @@ class VeczorGUI {
 
   color() {
     this._veczor.color = Veczor.createNeonColor(0, canvas.height);
+  }
+
+  canvasPadding(event) {
+    const { value } = event.target;
+    CONFIG_ELEMENTS.CANVAS_PADDING_OUTPUT.textContent = value;
+
+    this._veczor.fit(value);
+    this._veczor.center();
   }
 
   dashLength(event) {

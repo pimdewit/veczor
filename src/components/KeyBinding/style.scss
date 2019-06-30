@@ -1,0 +1,41 @@
+.KeyBinding {
+  border: 0;
+  background: none;
+  appearance: none;
+  color: currentColor;
+
+  --key-binding--color-border: rgba(0, 0, 0, 0.5);
+  --key-binding--color-border--active: rgba(0, 0, 0, 0.3);
+  --key-binding--color-background: rgba(0, 0, 0, 0.05);
+  --key-binding--color-background--active: rgba(0, 0, 0, 0.6);
+  --key-binding--color-focus: #007eff;
+}
+
+.Key span {
+  display: inline-block;
+
+  padding: 0.5rem;
+
+  font-family: var(--font-stack);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  border: 0.0625rem solid var(--key-binding--color-border);
+  border-radius: 0.25rem;
+  background-color: var(--key-binding--color-background);
+  box-shadow: 0 0.0625rem 0.0625rem rgba(0, 0, 0, .2), 0 1px 0 0 rgba(255, 255, 255, 0.4) inset;
+
+  transition: box-shadow 150ms ease-in-out;
+
+  .KeyBinding:active & {
+    transform: translateY(0.0625rem);
+    border: 0.0625rem solid var(--key-binding--color-border--active);
+    background-color: var(--key-binding--color-background--active);
+  }
+
+  .KeyBinding[data-focus-visible-added] &,
+  .KeyBinding:focus-within & {
+    box-shadow: 0 0 0 0.125rem var(--key-binding--color-focus), 0 0.125rem 0 0 rgba(255, 255, 255, 0.4) inset;
+  }
+}
