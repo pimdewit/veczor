@@ -482,7 +482,7 @@ class Veczor {
   set strokeWidth(strokeWidth) {
     this._options.element.strokeWidth = strokeWidth;
 
-    this._elements.forEach(element => element.strokeWidth = this._options.element.strokeWidth);
+    this._svg.strokeWidth = strokeWidth;
   }
 
 
