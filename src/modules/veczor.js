@@ -9,6 +9,17 @@ import { TweenLite } from 'gsap/TweenLite';
  */
 const DEFAULT_FILE_NAME = 'veczor.web.app_export.svg';
 
+/**
+ * Constants purely to prevent magic numbers.
+ * @type {{LENGTH: number, GAP: number}}
+ * @see Veczor.dashGap
+ * @see Veczor.dashLength
+ */
+const DASH_ARRAY = {
+  LENGTH: 0,
+  GAP: 1,
+};
+
 
 /** Visual experiment. */
 class Veczor {
@@ -436,7 +447,7 @@ class Veczor {
    * @return {number}
    */
   get dashGap() {
-    return this._options.element.dashArray[0];
+    return this._options.element.dashArray[DASH_ARRAY.GAP];
   }
 
   /**
@@ -444,7 +455,7 @@ class Veczor {
    * @param {number} dashGap
    */
   set dashGap(dashGap) {
-    this._options.element.dashArray[0] = dashGap;
+    this._options.element.dashArray[DASH_ARRAY.GAP] = dashGap;
     this._svg.dashArray = this._options.element.dashArray;
   }
 
@@ -454,7 +465,7 @@ class Veczor {
    * @return {number}
    */
   get dashLength() {
-    return this._options.element.dashArray[1];
+    return this._options.element.dashArray[DASH_ARRAY.LENGTH];
   }
 
   /**
@@ -462,7 +473,7 @@ class Veczor {
    * @param {number} dashLength
    */
   set dashLength(dashLength) {
-    this._options.element.dashArray[1] = dashLength;
+    this._options.element.dashArray[DASH_ARRAY.LENGTH] = dashLength;
     this._svg.dashArray = this._options.element.dashArray;
   }
 
