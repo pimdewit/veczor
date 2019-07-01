@@ -445,7 +445,7 @@ class Veczor {
    */
   set dashGap(dashGap) {
     this._options.element.dashArray[0] = dashGap;
-    this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
+    this._svg.dashArray = this._options.element.dashArray;
   }
 
 
@@ -463,7 +463,7 @@ class Veczor {
    */
   set dashLength(dashLength) {
     this._options.element.dashArray[1] = dashLength;
-    this._elements.forEach(element => element.dashArray = this._options.element.dashArray);
+    this._svg.dashArray = this._options.element.dashArray;
   }
 
 
