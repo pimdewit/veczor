@@ -207,10 +207,9 @@ class Veczor {
    * @private
    */
   _setupSVG(svg) {
-    const { strokeCap, strokeColor, strokeWidth, blendMode, dashArray } = this._options.element;
+    const { strokeCap, strokeColor, strokeWidth, blendMode } = this._options.element;
 
     this._svg = this._engine.project.importSVG(svg);
-
     this._elements = Veczor.getSVGChildElements(this._svg);
 
     this._svg.strokeCap = strokeCap;
@@ -219,8 +218,9 @@ class Veczor {
 
     this._elements.forEach(element => {
       element.blendMode = blendMode;
-      element.dashArray = dashArray;
     });
+
+    this._setDashArray();
   }
 
   /**
@@ -262,6 +262,18 @@ class Veczor {
         y,
       });
     });
+  }
+
+  /**
+   * This method is purely there to fix a bug in which the DashArray does not update unless you
+   * trigger the DashOffset too.
+   * @private
+   * @see Veczor.dashLength
+   * @see Veczor.dashGap
+   */
+  _setDashArray() {
+    this._svg.dashArray = this._options.element.dashArray;
+    this._elements.forEach(element => element.dashOffset += 0.0001);
   }
 
 
@@ -456,7 +468,7 @@ class Veczor {
    */
   set dashGap(dashGap) {
     this._options.element.dashArray[DASH_ARRAY.GAP] = dashGap;
-    this._svg.dashArray = this._options.element.dashArray;
+    this._setDashArray();
   }
 
 
@@ -474,7 +486,7 @@ class Veczor {
    */
   set dashLength(dashLength) {
     this._options.element.dashArray[DASH_ARRAY.LENGTH] = dashLength;
-    this._svg.dashArray = this._options.element.dashArray;
+    this._setDashArray();
   }
 
 
