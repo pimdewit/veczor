@@ -11,6 +11,6 @@
     "paper": "^0.12.3"
   },
   "devDependencies": {
-    "@pdw.io/eslint-config": "^1.2.1"
+    "@pdw.io/eslint-config": "^1.2.2"
   }
 }
